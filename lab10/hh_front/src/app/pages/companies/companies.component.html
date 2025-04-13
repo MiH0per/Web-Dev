@@ -1,0 +1,36 @@
+<!-- Companies List -->
+<div *ngIf="mode === 'list'" class="container mx-auto p-6">
+  <h2 class="text-3xl font-extrabold text-indigo-800 mb-8">Our Trusted Companies</h2>
+  <ul class="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+    <li *ngFor="let company of companies" class="bg-white border border-indigo-100 rounded-xl p-6 shadow hover:shadow-xl transition duration-300">
+      <a [routerLink]="['/companies', company.id]" class="text-indigo-600 text-xl font-semibold hover:underline">
+        {{ company.name }}
+      </a>
+      <p class="mt-2 text-sm text-gray-500">{{ company.city }}</p>
+    </li>
+  </ul>
+</div>
+
+<!-- Company Details -->
+<div *ngIf="mode === 'detail' && company" class="container mx-auto p-6">
+  <div class="bg-white shadow-lg rounded-xl p-8">
+    <h2 class="text-3xl font-bold text-indigo-800 mb-4">{{ company.name }}</h2>
+    <p class="text-base text-gray-600 mb-2"><span class="font-semibold">City:</span> {{ company.city }}</p>
+    <p class="text-gray-600"><span class="font-semibold">Description:</span> {{ company.description }}</p>
+    <a [routerLink]="['/companies', company.id, 'vacancies']"
+       class="mt-6 inline-block bg-indigo-600 text-white px-5 py-2 rounded-lg shadow hover:bg-indigo-700 transition duration-300">
+      View Vacancies
+    </a>
+  </div>
+</div>
+
+<!-- Vacancies List -->
+<div *ngIf="mode === 'vacancies' && vacancies.length > 0" class="container mx-auto p-6">
+  <h2 class="text-3xl font-bold text-indigo-800 mb-8">Vacancies at this Company</h2>
+  <ul class="space-y-6">
+    <li *ngFor="let vacancy of vacancies" class="bg-indigo-50 border border-indigo-100 rounded-xl p-6 shadow-sm">
+      <strong class="block text-xl text-gray-700 font-semibold">{{ vacancy.name }}</strong>
+      <span class="mt-2 block text-green-600 font-bold text-lg">$ {{ vacancy.salary }}</span>
+    </li>
+  </ul>
+</div>
